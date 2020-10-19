@@ -1,15 +1,12 @@
 from pimotion import PiMotion
-from cloudapp import CloudAppAPI
-from cloudapp.exceptions import CloudAppHttpError
-from m2x.client import M2XClient
 from requests.exceptions import HTTPError, RequestException
-import ConfigParser
+#import ConfigParser
 
 
-Config = ConfigParser.ConfigParser()
-Config.read('settings.cfg')
+#Config = ConfigParser.ConfigParser()
+#Config.read('settings.cfg')
 
-
+"""
 def callback(path):
     client = M2XClient(Config.get('m2x', 'api_key'))
     try:
@@ -27,7 +24,9 @@ def callback(path):
         print '  BODY: %s' % client.last_response.json
     except (RequestException, CloudAppHttpError), e:
         print 'CloudApp ERROR:' + e.message
+"""
 
+callback = None
 
 motion = PiMotion(verbose=True, post_capture_callback=callback)
 motion.start()

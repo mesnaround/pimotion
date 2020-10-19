@@ -1,5 +1,3 @@
-from __future__ import division
-
 import time
 import os
 import subprocess
@@ -24,7 +22,7 @@ class CaptureHandler:
 
     def tick(self):
         if self.detected:
-            print "Started working on capturing"
+            print("Started working on capturing")
             self.working = True
             self.detected = False
             self.i += 1
@@ -38,15 +36,15 @@ class CaptureHandler:
             for x in range(1, 16):
                 filename = "detected-%02d.jpg" % x
                 self.camera.capture(path + filename, use_video_port=True)
-                print "Captured " + filename
+                print("Captured {}".format(filename))
 
             self.camera.stop_preview()
 
-            print "Generating the montage"
+            print("Generating the montage")
             montage_file = path + 'montage.jpg'
             subprocess.call("montage -border 0 -background none -geometry 240x180 " + path + "* " + montage_file, shell=True)
 
-            print "Finished capturing"
+            print("Finished capturing")
 
             if self.callback:
                 self.callback(montage_file)
@@ -78,9 +76,9 @@ class PiMotion:
         self.verbose = verbose
         self.post_capture_callback = post_capture_callback
 
-    def __print(self, str):
+    def __print(self, msg):
         if self.verbose:
-            print str
+            print(msg)
 
     def start(self):
         with picamera.PiCamera() as camera:
